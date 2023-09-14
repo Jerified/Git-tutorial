@@ -16,7 +16,7 @@ const Repos = ({reposUrl}: any) => {
                     if(data.message) throw new Error(data.message)
                     setRepos(data)
                     // console.log(repos)
-                } catch (error:) {
+                } catch (error: any) {
                     toast({
                         title: "Error",
                         description: error.message,
@@ -36,8 +36,8 @@ const Repos = ({reposUrl}: any) => {
     <div>
         <h1 className="text-2xl text-center">REPOSITORIES</h1>
         {loading && <Loader />}
-        {repos.sort((a,b) => b.stargazers_count - a.stargazers_count)
-        .map((repo, index) => {
+        {repos.sort((a,b): any => b.stargazers_count - a.stargazers_count)
+        .map((repo, index: any) => {
             if(index > 4 && !showMore) return null
             return (
                 <div className="" key={repo.id}>

@@ -26,7 +26,7 @@ const Search = ({ setUserData, setLoading }: any) => {
 				});
 			}
 			setUserData(data);
-			// addUserToLocalStorage(data, query);
+			addUserToLocalStorage(data, textValue);
 		} catch (error: any) {
 			toast({
 				title: "Error",
@@ -41,8 +41,23 @@ const Search = ({ setUserData, setLoading }: any) => {
 		}
 	};
 
-	const addUserToLocalStorage = () => {
-		
+	const addUserToLocalStorage = (data, username) => {
+		const users = JSON.parse(localStorage.getItem("github-users")) || []
+		console.log(users)
+		const userExists = users.find((user: any) => user.id === username)
+		console.log(userExists)
+		if (userExists) {
+			users.splice(users.indexOf(userExists), 1)
+		}
+		users.unshift({
+			id: username,
+			avatar_url: data.avatar_url,
+			name: data.name,
+			url: data.html_url
+		})
+
+		localStorage.setItem("github-users", JSON.stringify(users))
+		console.log(users)
 	}
   return (
     <div className="pt-8">

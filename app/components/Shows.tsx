@@ -4,13 +4,14 @@ import {BsTwitter} from 'react-icons/bs'
 import { MdLocationOn } from 'react-icons/md';
 import {HiLink} from 'react-icons/hi'
 import {PiBuildingsFill} from 'react-icons/pi'
+import Repos from './Repos';
 
 interface iopt {
   year: string
 
 }
 
-const Shows = ({userData}: any) => {
+const Shows = ({userData, setloading}: any) => {
     const {
         avatar_url,
         name,
@@ -24,9 +25,11 @@ const Shows = ({userData}: any) => {
         blog,
         twitter_username,
         company,
+        reposUrl
       } = userData;
 
-      const date = new Date(created_at);
+     
+    const date = new Date(created_at);
   const options = { year: "numeric", month: "short", day: "numeric" };
   const day = date.toLocaleDateString("en-GB", options);
   const biography = bio ? bio : "This profile has no bio";
@@ -34,8 +37,13 @@ const Shows = ({userData}: any) => {
     !!blog && !blog.startsWith("http://") && !blog.startsWith("https://")
       ? "http://" + blog
       : blog;
+
+       setloading && (
+        <h1>Loading</h1>
+      )
   return (
     <div>
+    
         <div className="mt-4 rounded-[0.938rem] bg-surface px-6 pb-12 pt-8 shadow-normal dark:shadow-none md:mt-6 md:p-10 lg:p-12">
       <img
         className="inline-block h-[70px] w-auto rounded-full md:h-[117px]"
@@ -146,6 +154,8 @@ const Shows = ({userData}: any) => {
         </div>
       </div>
     </div>
+
+    <Repos reposUrl={reposUrl} />
     </div>
   )
 }

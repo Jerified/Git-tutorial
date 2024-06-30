@@ -16,7 +16,7 @@ const History = () => {
     setList(details);
   }, [list]);
 
-  const handleDelete = (userId) => {
+  const handleDelete = (userId: any) => {
     const users: User[] = JSON.parse(localStorage.getItem('github-users')) || "[]";
     const userToDelete = users.find((user) => user.id === userId)
     if (userToDelete) {
